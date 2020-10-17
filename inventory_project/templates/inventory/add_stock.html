@@ -3,5 +3,8 @@
 <!-- {% block title %}home{% endblock title %} -->
 
 {% block content %}
-    <h1>detail</h1>
+<form method='POST' action=''>{% csrf_token %}
+    {{form}}
+    <input type="submit" value='Save'/>
+</form>
 {% endblock %}
