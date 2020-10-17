@@ -1,0 +1,11 @@
+{% extends 'base/base.html' %}
+
+<!-- {% block title %}home{% endblock title %} -->
+
+{% block content %}	
+{{title}}<br>
+{% for instance in queryset %}
+{{instance.item_name}}, {{instance.quantity}}<br>
+
+{% endfor %}
+{% endblock %}
