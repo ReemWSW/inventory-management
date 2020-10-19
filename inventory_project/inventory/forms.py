@@ -16,7 +16,7 @@ class StockCreateForm(forms.ModelForm):
     # for instance in Stock.objects.all():
     #   if instance.category == category:
     #     raise forms.ValidationError(category + ' is already created')
-    
+
 		return category
 
 
@@ -31,3 +31,8 @@ class StockSearchForm(forms.ModelForm):
   class Meta:
     model = Stock
     fields = ['category', 'item_name']
+
+class StockUpdateForm(forms.ModelForm):
+	class Meta:
+		model = Stock
+		fields = ['category', 'item_name', 'quantity']

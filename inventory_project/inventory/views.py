@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 from .models import Stock
-from .forms import StockCreateForm, StockSearchForm
+from .forms import StockCreateForm, StockSearchForm, StockUpdateForm
 # Create your views here.
 def home(request):
 	title = 'Welcome: This is the Home Page'
@@ -45,3 +45,24 @@ def add_item(request):
 		"title": title,
 	}
 	return render(request, "inventory/add_stock.html", context)
+
+def update_item(request, pk):
+	queryset = Stock.objects.get(id=pk)
+	form = StockUpdateForm(instance=queryset)
+	if request.method == 'POST':
+		form = StockUpdateForm(request.POST, instance=queryset)
+		if form.is_valid():
+			form.save()
+			return redirect('/list_item')
+
+	context = {
+		'form':form
+	}
+	return render(request, 'inventory/add_stock.html', context)
+
+def delete_item(request, pk):
+	queryset = Stock.objects.get(id=pk)
+	if request.method == 'POST':
+		queryset.delete()
+		return redirect('/list_item')
+	return render(request, 'inventory/delete_item.html')
