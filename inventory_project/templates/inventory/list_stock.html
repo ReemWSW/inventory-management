@@ -1,11 +1,35 @@
 {% extends 'base/base.html' %}
+{% load crispy_forms_tags %}
 
-<!-- {% block title %}home{% endblock title %} -->
+{% block title %}{{title}}{% endblock title %}
 
 {% block content %}	
-{{title}}<br>
-{% for instance in queryset %}
-{{instance.item_name}}, {{instance.quantity}}<br>
 
+<form method='POST' action=''>{% csrf_token %}
+  {{form|crispy}}
+      <input type="submit" value='Search'/>
+</form>
+<br>
+
+<h1>{{header}}</h1>
+
+<table class='table'>
+  <thead>
+    <tr>
+      <th>COUNT</th>
+      <th>CATEGORY</th>
+      <th>ITEM NAME</th>
+      <th>QUANTITY IN STORE</th>
+    </tr>
+  </thead>
+{% for instance in queryset %}
+    <tr>
+      <td>{{forloop.counter}}</td>
+      <td>{{instance.category}}</td>
+      <td>{{instance.item_name}}</td>
+      <td>{{instance.quantity}}</td>
+    </tr>
 {% endfor %}
+</table>
+
 {% endblock %}

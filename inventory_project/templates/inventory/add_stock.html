@@ -1,10 +1,13 @@
 {% extends 'base/base.html' %}
+{% load crispy_forms_tags %}
 
-<!-- {% block title %}home{% endblock title %} -->
+{% block title %}{{title}}{% endblock title %}
 
 {% block content %}
-<form method='POST' action=''>{% csrf_token %}
-    {{form}}
+<h1>{{title}}</h1>
+<form method='POST' action=''>
+    {% csrf_token %}
+    {{form|crispy}}
     <input type="submit" value='Save'/>
 </form>
 {% endblock %}
